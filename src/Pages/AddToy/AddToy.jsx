@@ -1,10 +1,19 @@
 import { useForm } from "react-hook-form";
 
 const AddToy = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-
-    console.log(watch("example")); // watch input value by passing the name of it
+    const { register, handleSubmit,  formState: { errors } } = useForm();
+    const onSubmit = toy => {
+        console.log(toy);
+        fetch('https://toy-marketplace-server-orpin.vercel.app/toys', {
+            method: "POST",
+            headers: {
+                "content-type": "Application/json"
+            },
+            body: JSON.stringify(toy)
+        })
+        .then(res => res.json()
+        .then(data => console.log(data)))
+    };
 
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
