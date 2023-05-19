@@ -34,9 +34,9 @@ const Navbar = () => {
             <div className="navbar-end">
                 {
                     user ?
-                    <div className="dropdown me-2 dropdown-end">
+                    <div className="dropdown tooltip tooltip-bottom me-2 dropdown-end" data-tip={user.displayName}>
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
+                        <div className="w-10 rounded-full " >
                             <img src={user.photoURL? user.photoURL : '/src/assets/user.png'} />
                         </div>
                     </label>
