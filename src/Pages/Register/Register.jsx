@@ -1,8 +1,11 @@
 
 import { Link } from 'react-router-dom';
 import './Register.css'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
 const Register = () => {
+    const {signUp, updateUser} = useContext(AuthContext);
+
     const [error, setError] = useState('')
     const handleRegister = event => {
         event.preventDefault();
@@ -17,6 +20,16 @@ const Register = () => {
             return setError('Password and Confirm Password do not match')
         }
         console.log(name,email,photo, password,confirmPassword);
+        // sign up with email and password
+        signUp(email,password)
+        .then(result => {
+            const user = result.user;
+            console.log('from register',user);
+            updateUser(name,photo)
+            .then(()=>{})
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
     }
     return (
             <div className="hero py-10 min-h-screen bg-[#C2E0EB]">
