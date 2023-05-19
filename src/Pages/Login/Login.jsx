@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 
 const Login = () => {
-    const { login, googleLogin } = useContext(AuthContext);
+    const { login, googleLogin, githubLogin } = useContext(AuthContext);
     const [error, setError] = useState('')
 
     // handle login button click and 
@@ -24,21 +24,23 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
             })
-            .then(err => console.log(err));
+            .catch(err => console.log(err))
     }
 
     //handle google button click 
     // and login with google 
     const handleGoogleLogin = () => {
         googleLogin()
-        .then((result) => console.log(result.user))
-        .catch(err => console.log(err))
+            .then((result) => console.log(result.user))
+            .catch(err => console.log(err))
     }
 
     // handle github button onClick
     // and login with github
     const handleGithubLogin = () => {
-
+        githubLogin()
+            .then((result) => console.log(result.user))
+            .catch(err => console.log(err))
     }
 
     return (
@@ -75,8 +77,8 @@ const Login = () => {
                         </form>
                         <div className="divider text-sm text-slate-500">Or sign Up using</div>
                         <div className="flex justify-center items-center">
-                                <button onClick={handleGoogleLogin} className="btn border-none btn-sm btn-outline btn-primary"><FcGoogle className='text-2xl me-2 ' /></button>
-                                <button onClick={handleGithubLogin} className="btn  border-none btn-sm  btn-outline "><FaGithub className='text-2xl me-2' /></button>
+                            <button onClick={handleGoogleLogin} className="btn border-none btn-sm btn-outline btn-primary"><FcGoogle className='text-2xl me-2 ' /></button>
+                            <button onClick={handleGithubLogin} className="btn  border-none btn-sm  btn-outline "><FaGithub className='text-2xl me-2' /></button>
                         </div>
                     </div>
 
