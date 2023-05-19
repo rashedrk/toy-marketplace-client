@@ -1,7 +1,7 @@
 
 const Footer = () => {
     return (
-        <footer className="footer p-10 bg-base-200 text-base-content">
+        <footer className="mt-5 footer p-10 bg-base-200 text-base-content">
             <div>
                 <img className="w-72" src="/src/assets/logo.png" alt="" />
                 <p>KidsLand Ltd.<br />Providing kids toy since 1999</p>

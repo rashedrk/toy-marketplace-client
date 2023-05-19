@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-
 const Navbar = () => {
     return (
         <div className="navbar bg-base-100">
@@ -40,7 +39,7 @@ const Navbar = () => {
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
-                <Link className="btn border-none btn-md bg-[#F379A7]  hover:bg-[#95b3e0] ">Login</Link>
+                <Link className="btn btn-md primary-btn ">Login</Link>
             </div>
         </div>
     );
