@@ -3,7 +3,16 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-    const {user} = useContext(AuthContext);
+    const {user,logout} = useContext(AuthContext);
+
+    // handle logout onClick 
+    // and logout user 
+    const handleLogout = () => {
+        logout()
+        .then(() => {})
+        .catch(err => console.log(err))
+    }
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -34,7 +43,7 @@ const Navbar = () => {
             <div className="navbar-end">
                 {
                     user ?
-                    <div className="dropdown tooltip tooltip-bottom me-2 dropdown-end" data-tip={user.displayName}>
+                    <div className="dropdown tooltip tooltip-bottom  me-2 dropdown-end" data-tip={user.displayName}>
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full " >
                             <img src={user.photoURL? user.photoURL : '/src/assets/user.png'} />
@@ -42,11 +51,11 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><a>Profile</a></li>
-                        <li><button>Logout</button></li>
+                        <li><button onClick={handleLogout}>Logout</button></li>
                     </ul>
                 </div>
                 :
-                <Link className="btn btn-md primary-btn ">Login</Link>}
+                <Link to='/login' className="btn btn-md primary-btn ">Login</Link>}
             </div>
         </div>
     );
