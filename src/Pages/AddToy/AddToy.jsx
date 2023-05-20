@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 
 const AddToy = () => {
+    const {user} = useContext(AuthContext);
     const { register, handleSubmit,  formState: { errors } } = useForm();
     const onSubmit = toy => {
         console.log(toy);
@@ -17,9 +20,8 @@ const AddToy = () => {
 
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        <form onSubmit={handleSubmit(onSubmit)}>
-
-            <div className="grid grid-cols-2 gap-4">
+        <form className="p-6" onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Toy name</span>
@@ -38,14 +40,14 @@ const AddToy = () => {
                     <label className="label">
                         <span className="label-text">Seller Name</span>
                     </label>
-                    <input type="text" placeholder="Enter seller name " {...register("seller", { required: true })} className="input input-bordered w-full max-w-xs" />
+                    <input type="text" value={user?.displayName} placeholder="Enter seller name " {...register("seller", { required: true })} className="input input-bordered w-full max-w-xs" />
                     {errors.seller && <span className="text-red-500 text-sm">*required</span>}
                 </div>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Seller Email</span>
                     </label>
-                    <input type="email" placeholder="Enter seller email " {...register("email", { required: true })} className="input input-bordered w-full max-w-xs" />
+                    <input type="email" value={user?.email} placeholder="Enter seller email " {...register("email", { required: true })} className="input input-bordered w-full max-w-xs" />
                     {errors.email && <span className="text-red-500 text-sm">*required</span>}
                 </div>
                 <div className="form-control w-full max-w-xs">
@@ -92,7 +94,7 @@ const AddToy = () => {
                 </div>
             </div>
 
-            <input type="submit" className="mt-4 btn btn-success" value="Add Toy" />
+            <input type="submit" className="mt-4 btn primary-btn" value="Add Toy" />
         </form>
     );
 };

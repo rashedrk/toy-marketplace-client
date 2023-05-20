@@ -22,9 +22,7 @@ const Register = () => {
         console.log(name,email,photo, password,confirmPassword);
         // sign up with email and password
         signUp(email,password)
-        .then(result => {
-            const user = result.user;
-            console.log('from register',user);
+        .then(() => {
             updateUser(name,photo)
             .then(()=>{})
             .catch(err => console.log(err));
@@ -44,7 +42,7 @@ const Register = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" required name='name' placeholder="Enter Your Name" className="input input-bordered" />
+                                <input type="text"  name='name' placeholder="Enter Your Name" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">

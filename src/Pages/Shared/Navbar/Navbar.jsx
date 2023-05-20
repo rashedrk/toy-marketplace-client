@@ -22,12 +22,12 @@ const Navbar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3  p-2 shadow bg-base-100 rounded-box w-52">
                         <li ><Link className="hover:bg-white font-semibold text-base  hover:text-[#F379A7]">Home</Link></li>
-                        <li><Link to='/allToys' className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">All Toys</Link></li>
+                        <li><Link to='/toys' className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">All Toys</Link></li>
                         {
                             user &&
                             <>
                                 <li><Link className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">My Toys</Link></li>
-                                <li><Link className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">Add a Toy</Link></li>
+                                <li><Link to='/toys/add' className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">Add a Toy</Link></li>
                             </>
                         }
                         <li><Link className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">Blogs</Link></li>
@@ -39,12 +39,12 @@ const Navbar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li ><Link className="hover:bg-white font-semibold text-base  hover:text-[#F379A7]">Home</Link></li>
-                    <li><Link to='/allToys'  className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">All Toys</Link></li>
+                    <li><Link to='/toys'  className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">All Toys</Link></li>
                     {
                         user &&
                         <>
                             <li><Link className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">My Toys</Link></li>
-                            <li><Link className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">Add a Toy</Link></li>
+                            <li><Link to='/toys/add' className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">Add a Toy</Link></li>
                         </>
                     }
                     <li><Link className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">Blogs</Link></li>
