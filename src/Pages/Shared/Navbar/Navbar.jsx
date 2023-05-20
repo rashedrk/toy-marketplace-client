@@ -26,7 +26,7 @@ const Navbar = () => {
                         {
                             user &&
                             <>
-                                <li><Link className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">My Toys</Link></li>
+                                <li><Link to='/toys/my' className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">My Toys</Link></li>
                                 <li><Link to='/toys/add' className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">Add a Toy</Link></li>
                             </>
                         }
@@ -43,7 +43,7 @@ const Navbar = () => {
                     {
                         user &&
                         <>
-                            <li><Link className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">My Toys</Link></li>
+                            <li><Link  to='/toys/my' className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">My Toys</Link></li>
                             <li><Link to='/toys/add' className="hover:bg-white  font-semibold text-base hover:text-[#F379A7]">Add a Toy</Link></li>
                         </>
                     }

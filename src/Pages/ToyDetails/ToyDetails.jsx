@@ -4,7 +4,7 @@ import { BsStar, BsStarFill } from "react-icons/bs";
 
 const ToyDetails = () => {
     const toy = useLoaderData();
-    const { toyName, seller, price, subCategory, quantity, rating, photo, email, details } = toy;
+    const { toyName, seller, price, subCategory, quantity, rating, photo, email, description } = toy;
     return (
         <div className="grid p-8 justify-center lg:grid-cols-3">
             <img src={photo}/>
@@ -25,7 +25,7 @@ const ToyDetails = () => {
                 <br />
                 <p className="text-md mt-2">Available: <span className=" text-gray-500">{quantity}</span></p>
                 <p className="text-md ">Sub Category: <span className=" text-gray-500">{subCategory}</span></p>
-                <p className="text-md mb-3">Details: <span className="text-gray-500">{details}</span></p>
+                <p className="text-md mb-3">Details: <span className="text-gray-500">{description}</span></p>
 
                 <button className="btn primary-btn">Order Now</button>
             </div>

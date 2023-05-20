@@ -6,6 +6,7 @@ import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import AllToys from "../../Pages/AllToys/AllToys";
 import ToyDetails from "../../Pages/ToyDetails/ToyDetails";
+import MyToys from "../../Pages/MyToys/MyToys";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
                 path: 'toys/:id',
                 element: <ToyDetails/>,
                 loader: ({params}) => fetch(`https://toy-marketplace-server-orpin.vercel.app/toys/${params.id}`)
+            },
+            {
+                path: 'toys/my',
+                element: <MyToys/>,
+                
             }
         ]
     },
