@@ -13,7 +13,7 @@ const ToyDetails = () => {
                 <p className="pt-3 text-sm text-gray-500">by: {seller}</p>
                 <p className="text-sm mb-3 text-gray-500">{email}</p>
                 <p className="text-2xl font-bold mb-3 text-[#F379A7]
-                        ">${price}-<span className="text-[#f47ba992] line-through text-xl">${price * 1.7}</span></p>
+                        ">${price}</p>
                 <Rating
                     placeholderRating={rating}
                     emptySymbol={<BsStar className="text-yellow-400" />}
@@ -23,9 +23,9 @@ const ToyDetails = () => {
                 />
                 <span>{rating}</span>
                 <br />
-                <p className="text-md mt-2">Available: <span className="text-gray-400">{quantity}</span></p>
-                <p className="text-md">Sub Category: {subCategory}</p>
-                <p className="text-md mb-3">Details: {details}</p>
+                <p className="text-md mt-2">Available: <span className=" text-gray-500">{quantity}</span></p>
+                <p className="text-md ">Sub Category: <span className=" text-gray-500">{subCategory}</span></p>
+                <p className="text-md mb-3">Details: <span className="text-gray-500">{details}</span></p>
 
                 <button className="btn primary-btn">Order Now</button>
             </div>
