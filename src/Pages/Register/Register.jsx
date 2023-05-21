@@ -1,12 +1,16 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.css'
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
 const Register = () => {
     const {signUp, updateUser} = useContext(AuthContext);
 
-    const [error, setError] = useState('')
+    //show error msg
+    const [error, setError] = useState('');
+    //navigation after register
+    const navigate = useNavigate();
+
     const handleRegister = event => {
         event.preventDefault();
         const form = event.target;
@@ -16,16 +20,18 @@ const Register = () => {
         const password = form.password.value;
         const confirmPassword = form.confirmPassword.value;
 
+        //checking for pass and confirm pass match
         if (password !== confirmPassword) {
             return setError('Password and Confirm Password do not match')
         }
-        console.log(name,email,photo, password,confirmPassword);
+        
         // sign up with email and password
         signUp(email,password)
         .then(() => {
             updateUser(name,photo)
             .then(()=>{})
             .catch(err => console.log(err));
+            navigate('/login') //navigation to login page after register
         })
         .catch(err => console.log(err));
     }

@@ -10,9 +10,6 @@ const Login = () => {
     const { login, googleLogin, githubLogin } = useContext(AuthContext);
     const [error, setError] = useState('');
 
-    //handle or showing error using toast
-
-
     // after login go to homepage or redirect to other page 
     const navigate = useNavigate();
     const location = useLocation();
