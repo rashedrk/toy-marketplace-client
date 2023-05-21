@@ -1,7 +1,8 @@
 import Gallery from "../Gallery/Gallery";
 import Header from "../Header/Header";
-import Review from "../Review/Review";
+import Offer from "../Offer/Offer";
 import ShopByCategory from "../ShopByCategory/ShopByCategory";
+import Trending from "../Trending/Trending";
 
 
 const Home = () => {
@@ -10,7 +11,8 @@ const Home = () => {
             <Header/>
             <Gallery/>
             <ShopByCategory/>
-            <Review/>
+            <Trending/>
+            <Offer/>
         </>
     );
 };
