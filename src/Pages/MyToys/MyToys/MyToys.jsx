@@ -5,6 +5,7 @@ import { RiDeleteBin6Line } from "react-icons/ri"
 import Modal from "../Modal/Modal";
 import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const MyToys = () => {
     const { user } = useContext(AuthContext);
@@ -13,7 +14,8 @@ const MyToys = () => {
         fetch(`https://toy-marketplace-server-orpin.vercel.app/toys/user/${user.email}`)
             .then(res => res.json())
             .then(data => setToys(data))
-    }, []);
+    }, toys);
+
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = toy => {
@@ -28,6 +30,47 @@ const MyToys = () => {
             .then(res => res.json()
                 .then(data => console.log(data)))
     };
+
+    //handle delete toys 
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`https://toy-marketplace-server-orpin.vercel.app/toys/${id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your toy has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+
+            }
+            else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                Swal.fire(
+                    'Cancelled',
+                    'Your toy is safe :)',
+                    'error'
+                )
+            }
+        })
+    }
     return (
         <div className="overflow-x-auto">
             <table className="table w-full">
@@ -53,57 +96,8 @@ const MyToys = () => {
                             <td>{toy.quantity}</td>
                             <td>{toy.description}</td>
                             <td>
-                                {/* modal start / edit button  */}
-                                <label htmlFor="my-modal" className="btn btn-primary"><AiOutlineEdit /></label>
-                                {/* Put this part before </body> tag */}
-                                <input type="checkbox" id="my-modal" className="modal-toggle" />
-                                <div className="modal">
-                                    <div className="modal-box">
-                                        <form className="p-6" onSubmit={handleSubmit(onSubmit)}>
-                                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
-                                                <div className="form-control w-full max-w-xs">
-                                                    <label className="label">
-                                                        <span className="label-text">Toy name</span>
-                                                    </label>
-                                                    <input type="text" placeholder="Enter Toy Name " {...register("toyName", { required: true })} className="input input-bordered w-full max-w-xs" />
-                                                    {errors.toyName && <span className="text-red-500 text-sm">*required</span>}
-                                                </div>
-                                                <div className="form-control w-full max-w-xs">
-                                                    <label className="label">
-                                                        <span className="label-text">Price</span>
-                                                    </label>
-                                                    <input type="text" placeholder="Enter Price " {...register("price", { required: true })} className="input input-bordered w-full max-w-xs" />
-                                                    {errors.price && <span className="text-red-500 text-sm">*required</span>}
-                                                </div>
-                                                <div className="form-control w-full max-w-xs">
-                                                    <label className="label">
-                                                        <span className="label-text">Quantity</span>
-                                                    </label>
-                                                    <input type="text" placeholder="Enter Available Quantity " {...register("quantity", { required: true })} className="input input-bordered w-full max-w-xs" />
-                                                    {errors.quantity && <span className="text-red-500 text-sm">*required</span>}
-                                                </div>
-                                                <div className="form-control w-full max-w-xs">
-                                                    <label className="label">
-                                                        <span className="label-text">Description</span>
-                                                    </label>
-                                                    <textarea {...register("description", { required: true })} className="textarea textarea-bordered" placeholder="Short Description"></textarea>
-                                                    {errors.description && <span className="text-red-500 text-sm">*required</span>}
-                                                </div>
-                                            </div>
-                                            <div className="modal-action">
-                                                <label htmlFor="my-modal">
-                                                    <input type="submit" className="mt-4 btn primary-btn" value="Add Toy" />
-                                                </label>
-                                            </div>
-                                        </form>
-
-                                        {/* <div className="modal-action">
-                                            <label htmlFor="my-modal" className="btn">Yay!</label>
-                                        </div> */}
-                                    </div>
-                                </div>
-                                {/* modal end  */}
-                                <button className="ms-3 btn btn-error"><RiDeleteBin6Line /></button></td>
+                                <button  className="btn btn-primary"><AiOutlineEdit /></button>
+                                <button onClick={() => handleDelete(toy._id)} className="ms-3 btn btn-error"><RiDeleteBin6Line /></button></td>
 
                         </tr>)
                     }
