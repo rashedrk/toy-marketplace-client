@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const AddToy = () => {
     const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, reset, handleSubmit, formState: { errors } } = useForm();
     // showing success msg after adding toy
     const showToastMessage = () => {
         toast.success('Toy added Successfully !', {
@@ -24,7 +24,8 @@ const AddToy = () => {
         })
             .then(res => res.json()
             .then(() => { }))
-            showToastMessage()
+            showToastMessage();
+            reset();
 
     };
 
@@ -66,11 +67,12 @@ const AddToy = () => {
                     </label>
                     <select {...register("subCategory")} className="select select-bordered  w-full max-w-xs">
                         <option disabled selected>Pick your Sub Category</option>
-                        <option value="Homer">Homer</option>
-                        <option value="Marge">Marge</option>
-                        <option value="Bart">Bart</option>
-                        <option value="Lisa">Lisa</option>
-                        <option value="Maggie">Maggie</option>
+                        <option value="cat">Cat</option>
+                        <option value="dog">Dog</option>
+                        <option value="teddy">Teddy</option>
+                        <option value="dinosaur">Dinosaur</option>
+                        <option value="horse">Horse</option>
+                        <option value="cow">Cow</option>
                     </select>
                     {errors.subCategory && <span className="text-red-500 text-sm">*required</span>}
                 </div>

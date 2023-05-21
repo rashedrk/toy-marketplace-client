@@ -8,6 +8,7 @@ import AllToys from "../../Pages/AllToys/AllToys";
 import ToyDetails from "../../Pages/ToyDetails/ToyDetails";
 import MyToys from "../../Pages/MyToys/MyToys/MyToys";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import UpdateToy from "../../Pages/UpdateToy/UpdateToy";
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
                 path: 'toys/my',
                 element: <PrivateRoute><MyToys/></PrivateRoute>,
                 
+            },
+            {
+                path: 'toy/update/:id',
+                element: <PrivateRoute><UpdateToy/></PrivateRoute>,
+                loader: ({params}) => fetch(`https://toy-marketplace-server-orpin.vercel.app/toys/${params.id}`)
             }
         ]
     },

@@ -1,11 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-
 import { AiOutlineEdit } from "react-icons/ai"
 import { RiDeleteBin6Line } from "react-icons/ri"
-import Modal from "../Modal/Modal";
 import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
-import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyToys = () => {
     const { user } = useContext(AuthContext);
@@ -17,19 +15,7 @@ const MyToys = () => {
     }, toys);
 
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = toy => {
-        console.log(toy);
-        fetch('https://toy-marketplace-server-orpin.vercel.app/toys', {
-            method: "POST",
-            headers: {
-                "content-type": "Application/json"
-            },
-            body: JSON.stringify(toy)
-        })
-            .then(res => res.json()
-                .then(data => console.log(data)))
-    };
+
 
     //handle delete toys 
     const handleDelete = (id) => {
@@ -94,9 +80,11 @@ const MyToys = () => {
                             <td>{toy.price}</td>
                             <td>{toy.subCategory}</td>
                             <td>{toy.quantity}</td>
-                            <td>{toy.description}</td>
+                            <td >{toy.description}</td>
                             <td>
-                                <button  className="btn btn-primary"><AiOutlineEdit /></button>
+                                <Link to={`/toy/update/${toy._id}`}>
+                                    <button className="ms-3 btn btn-primary"><AiOutlineEdit /></button>
+                                </Link>
                                 <button onClick={() => handleDelete(toy._id)} className="ms-3 btn btn-error"><RiDeleteBin6Line /></button></td>
 
                         </tr>)
