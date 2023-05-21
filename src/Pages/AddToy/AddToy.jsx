@@ -1,12 +1,20 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
 
 const AddToy = () => {
-    const {user} = useContext(AuthContext);
-    const { register, handleSubmit,  formState: { errors } } = useForm();
+    const { user } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    // showing success msg after adding toy
+    const showToastMessage = () => {
+        toast.success('Toy added Successfully !', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
+    // form submit 
     const onSubmit = toy => {
-        console.log(toy);
         fetch('https://toy-marketplace-server-orpin.vercel.app/toys', {
             method: "POST",
             headers: {
@@ -14,8 +22,10 @@ const AddToy = () => {
             },
             body: JSON.stringify(toy)
         })
-        .then(res => res.json()
-        .then(data => console.log(data)))
+            .then(res => res.json()
+            .then(() => { }))
+            showToastMessage()
+
     };
 
     return (
@@ -58,9 +68,9 @@ const AddToy = () => {
                         <option disabled selected>Pick your Sub Category</option>
                         <option value="Homer">Homer</option>
                         <option value="Marge">Marge</option>
-                        <option  value="Bart">Bart</option>
-                        <option  value="Lisa">Lisa</option>
-                        <option  value="Maggie">Maggie</option>
+                        <option value="Bart">Bart</option>
+                        <option value="Lisa">Lisa</option>
+                        <option value="Maggie">Maggie</option>
                     </select>
                     {errors.subCategory && <span className="text-red-500 text-sm">*required</span>}
                 </div>
@@ -94,8 +104,10 @@ const AddToy = () => {
                 </div>
             </div>
 
-            <input type="submit" className="mt-4 btn primary-btn" value="Add Toy" />
+            <input  type="submit" className="mt-4 btn primary-btn" value="Add Toy" />
+            <ToastContainer/>
         </form>
+        
     );
 };
 
