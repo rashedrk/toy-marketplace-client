@@ -33,8 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'toys',
-                element: <AllToys/>,
-                loader: () => fetch('https://toy-marketplace-server-orpin.vercel.app/toys')
+                element: <AllToys/>
             },
             {
                 path: 'toys/:id',

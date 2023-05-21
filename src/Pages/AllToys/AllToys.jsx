@@ -1,18 +1,32 @@
 import { Link, useLoaderData } from "react-router-dom";
-import {AiOutlineSearch} from "react-icons/ai"
+import { AiOutlineSearch } from "react-icons/ai"
+import { useEffect, useState } from "react";
 
 const AllToys = () => {
-    const loadedToys = useLoaderData();
+    const [toys, setToys] = useState([]);
+
+    //load toy data by default all toy
+    useEffect(() => {
+        fetch('https://toy-marketplace-server-orpin.vercel.app/toys')
+            .then(res => res.json())
+            .then(data => setToys(data))
+    }, []);
+
+    // handle search and load data using search 
     const handleSearch = event => {
+        // get search value 
         event.preventDefault();
         const searchText = event.target.search.value;
-        console.log(searchText); 
+       //data loading
+        fetch(`https://toy-marketplace-server-orpin.vercel.app/toys/search/${searchText}`)
+            .then(res => res.json())
+            .then(data => setToys(data))
     }
     return (
         <div className="">
-            <form onSubmit={handleSearch}  className="flex justify-center my-5">
-                <input type="text" name="search" placeholder="Search" className="input input-bordered w-full max-w-xs" /> 
-                <button type="submit" className="ms-2 btn primary-btn text-3xl"><AiOutlineSearch  /></button>
+            <form onSubmit={handleSearch} className="flex justify-center my-5">
+                <input type="text" name="search" placeholder="Search" className="input input-bordered w-full max-w-xs" />
+                <button type="submit" className="ms-2 btn primary-btn text-3xl"><AiOutlineSearch /></button>
             </form>
             <table className="table w-full">
                 {/* head */}
@@ -29,7 +43,7 @@ const AllToys = () => {
                 </thead>
                 <tbody>
                     {
-                        loadedToys.map((toy, index) => <tr key={toy._id}>
+                        toys.map((toy, index) => <tr key={toy._id}>
                             <th>{index + 1}</th>
                             <td>{toy.toyName}</td>
                             <td>{toy.seller}</td>
