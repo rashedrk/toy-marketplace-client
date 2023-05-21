@@ -3,7 +3,7 @@ const Footer = () => {
     return (
         <footer className="mt-5 footer p-10 bg-base-200 text-base-content">
             <div>
-                <img className="w-72" src="/src/assets/logo.png" alt="" />
+                <img className="w-72" src="logo.png" alt="" />
                 <p>KidsLand Ltd.<br />Providing kids toy since 1999</p>
             </div>
             <div>
