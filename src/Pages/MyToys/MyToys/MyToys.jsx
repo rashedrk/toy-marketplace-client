@@ -12,7 +12,7 @@ const MyToys = () => {
         fetch(`https://toy-marketplace-server-orpin.vercel.app/toys/user/${user.email}`)
             .then(res => res.json())
             .then(data => setToys(data))
-    }, toys);
+    }, [toys]);
 
 
 
